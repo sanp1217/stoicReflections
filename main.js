@@ -1,12 +1,17 @@
 import { getQuote } from "./api.js";
 
-async function fetchQuote() {
+async function processQuote() {
     try {
         const quoteData = await getQuote();
-        console.log(quoteData);
+        addQuote(quoteData);
     } catch (e) {
         console.log(e);
     }
 }
 
-fetchQuote();
+function addQuote(quote) {
+    const quoteContainer = document.getElementById('quote');
+    quoteContainer.textContent = quote.text;
+}
+
+processQuote();
