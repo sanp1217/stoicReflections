@@ -9,9 +9,12 @@ async function processQuote() {
     }
 }
 
-function addQuote(quote) {
-    const quoteContainer = document.getElementById('quote');
-    quoteContainer.textContent = quote.text;
+function addQuote(quoteData) {
+    const quoteDiv = document.getElementById('quote');
+    quoteDiv.textContent = quoteData.text;
+
+    const authorDiv = document.getElementById('author');
+    authorDiv.textContent = quoteData.author;
 }
 
 processQuote();
