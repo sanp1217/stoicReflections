@@ -35,4 +35,12 @@ function addQuote(quoteData) {
     authorDiv.textContent = quoteData.author;
 }
 
+function dayPassed() {
+    if (storedDate === null || new Date(storedDate).getDate() !== today.getDate()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 processQuote();
