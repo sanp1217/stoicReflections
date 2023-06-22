@@ -1,6 +1,8 @@
 import { getQuote } from "./api.js";
 
 let quotes = [];
+let storedDate = localStorage.getItem("quoteDate");
+let today = new Date();
 
 document.addEventListener("DOMContentLoaded", () => {
     const storedQuotes = localStorage.getItem("quotes");
@@ -11,17 +13,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function processQuote() {
     try {
-        const quoteData = await getQuote();
+        if (dayPassed()) {
+            const quoteData = await getQuote();
 
-        let quote = {
-            quote: quoteData.text,
-            author: quoteData.author
-        };
+            let quote = {
+                quote: quoteData.text,
+                author: quoteData.author
+            };
+            quotes.push(quote);
 
-        //quotes.push(quote);
-        localStorage.setItem("quotes", JSON.stringify(quotes));
+            localStorage.setItem("quotes", JSON.stringify(quotes));
+            localStorage.setItem("quoteData", JSON.stringify(quoteData));
+            localStorage.setItem("quoteDate", today);
 
-        addQuote(quoteData);
+            addQuote(quoteData);
+        } else {
+            const quoteData = JSON.parse(localStorage.getItem("quoteData"));
+            addQuote(quoteData);
+        }
     } catch (e) {
         console.log(e);
     }
