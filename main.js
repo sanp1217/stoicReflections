@@ -41,7 +41,7 @@ function addQuote(quoteData) {
     quoteDiv.textContent = quoteData.text;
 
     const authorDiv = document.getElementById('author');
-    authorDiv.textContent = quoteData.author;
+    authorDiv.textContent = "-" + quoteData.author;
 }
 
 function dayPassed() {
