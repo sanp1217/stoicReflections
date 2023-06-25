@@ -4,6 +4,8 @@ let quotes = [];
 let storedDate = localStorage.getItem("quoteDate");
 let today = new Date();
 
+//Load already shown quotes from local storage to array
+//to use to not show duplicates.
 document.addEventListener("DOMContentLoaded", () => {
     const storedQuotes = localStorage.getItem("quotes");
     if (storedQuotes) {
@@ -36,6 +38,7 @@ async function processQuote() {
     }
 }
 
+//Add quote and author to DOM.
 function addQuote(quoteData) {
     const quoteDiv = document.getElementById('quote');
     quoteDiv.textContent = quoteData.text;
@@ -45,6 +48,8 @@ function addQuote(quoteData) {
 }
 
 function dayPassed() {
+    //If the date hasn't been recorded or stored date doesn't equal
+    //updated date.
     if (storedDate === null || new Date(storedDate).getDate() !== today.getDate()) {
         return true;
     } else {
