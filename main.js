@@ -18,16 +18,9 @@ async function processQuote() {
         if (dayPassed()) {
             const quoteData = await getQuote();
 
-            let quote = {
-                quote: quoteData.text,
-                author: quoteData.author
-            };
-            quotes.push(quote);
-
-            localStorage.setItem("quotes", JSON.stringify(quotes));
-            localStorage.setItem("quoteData", JSON.stringify(quoteData));
             localStorage.setItem("quoteDate", today);
 
+            storeQuote(quoteData);
             addQuote(quoteData);
         } else {
             const quoteData = JSON.parse(localStorage.getItem("quoteData"));
@@ -36,6 +29,17 @@ async function processQuote() {
     } catch (e) {
         console.log(e);
     }
+}
+
+function storeQuote(quoteData){
+    let quote = {
+                quote: quoteData.text,
+                author: quoteData.author
+            };
+            quotes.push(quote);
+
+            localStorage.setItem("quotes", JSON.stringify(quotes));
+	    localStorage.setItem("quoteData", JSON.stringify(quoteData));
 }
 
 //Add quote and author to DOM.
