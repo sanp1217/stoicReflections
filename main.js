@@ -4,14 +4,12 @@ let quotes = [];
 let storedDate = localStorage.getItem("quoteDate");
 let today = new Date();
 
-//Load already shown quotes from local storage to array
-//to use to not show duplicates.
-document.addEventListener("DOMContentLoaded", () => {
+function loadQuotes(){
     const storedQuotes = localStorage.getItem("quotes");
-    if (storedQuotes) {
+    if(storedQuotes){
         quotes = JSON.parse(storedQuotes);
     }
-});
+}
 
 async function processQuote() {
     try {
@@ -61,4 +59,5 @@ function dayPassed() {
     }
 }
 
+loadQuotes();
 processQuote();
