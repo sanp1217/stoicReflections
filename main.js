@@ -34,10 +34,15 @@ function storeQuote(quoteData){
                 quote: quoteData.text,
                 author: quoteData.author
             };
-            quotes.push(quote);
 
-            localStorage.setItem("quotes", JSON.stringify(quotes));
-	    localStorage.setItem("quoteData", JSON.stringify(quoteData));
+    if(isDuplicate(quote)){
+        processQuote();
+    }
+
+    quotes.push(quote);
+
+    localStorage.setItem("quotes", JSON.stringify(quotes));
+    localStorage.setItem("quoteData", JSON.stringify(quoteData));
 }
 
 //Add quote and author to DOM.
@@ -57,6 +62,10 @@ function dayPassed() {
     } else {
         return false;
     }
+}
+
+function isDuplicate(quoteToAdd){
+    return quotes.some(quote => quote.quote === quoteToAdd); 
 }
 
 loadQuotes();
